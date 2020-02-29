@@ -5,6 +5,7 @@ import ManejoTareas from "./components/ManejoTareas";
 import Login from './components/Login';
 import Register from './components/Register';
 import Products from './components/Products';
+import Carrito from './components/Carrito';
 import PageNotFound from './components/PageNotFound';
 import './App.scss';
 
@@ -24,6 +25,7 @@ class App extends Component {
           <Route path="/login" component={Login} exact/>
           <Route path="/register" component={Register} exact/>
           <Route path="/products" component={Products} exact/>
+          <Route path="/carrito" component={Carrito} exact/>
           {/*<Route component={PageNotFound}/>*/}
           
         </Switch>

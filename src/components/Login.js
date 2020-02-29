@@ -1,24 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
+import Home from './Home';
 import '../styles/login.scss';
 
 const Login = ({ history }) => {
 
-  const [state, setState] = useState({
+  const [state, setState] = useState({//inicializando el estado de este componente equivale a this.state,primer(state) parametro declara una variable
+    //el segundo un metodo para modificar la variable
     email: '',
     password: '',
     errorMsg:'',
   });
 
-  const { email, password, errorMsg } = state;
+  const { email, password, errorMsg } = state;//desestructuro
 
-  useEffect(() => {
-    sessionStorage.removeItem("usuarioLogueado");
+  useEffect(() => { //equivale al componetDiMount
+    sessionStorage.removeItem("usuarioLogueado");//setItem(necesita 2 param: nombre y valor),getItem(lee el valor),removeItem(borra lainfo del us logueado)
   },[])
+
+  //LocalStorage: aloja inf del sitio web, funcionan como cookies
+  //SessionStorage: cuando cierro el nav se pierde todo, funciona mientras estoy navegando
 
   const handleInputChange = ({ target: { name, value } }) => {
     setState({
-      ...state,
+      ...state,// a lo que ya tiene el obj state le agrega o lo actualiza
       [name]: value
     })
   }
@@ -36,7 +41,7 @@ const Login = ({ history }) => {
   // }
 
   const handleSubmit = (event) => {
-    event.preventDefault();
+    event.preventDefault();//prevenir que se ejecute
 
     fetch('http://tiendaonline2020.herokuapp.com/api/user/login',{
             method: 'POST',
@@ -58,8 +63,8 @@ const Login = ({ history }) => {
               errorMsg: "No existe un usuario con dicha contraseña. Intente nuevamente."
             });
           } else {
-            sessionStorage.setItem("usuarioLogueado",1);
-            history.push("/home ");
+            sessionStorage.setItem("usuarioLogueado",1);//sessionStorage.getItem("usuarioLogueado"); si es dis 1 
+            history.push("/home");
           }
         })
         .catch(err => console.log("Error!",err));

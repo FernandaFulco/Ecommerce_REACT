@@ -3,11 +3,10 @@ import { withRouter } from 'react-router-dom';
 import Tarea from './Tarea';
 
 class ManejoTareas extends Component {
-
-  componentWillMount(){
+  /*componentWillMount()hace que el componente se procese con datos vacíos al principio */
+  componentWillMount() {
     debugger;
-    if(sessionStorage.getItem("usuarioLogueado") !== "1")
-    {
+    if (sessionStorage.getItem("usuarioLogueado") !== "1") {
       this.props.history.push("/login");
     }
   }
@@ -74,10 +73,10 @@ class ManejoTareas extends Component {
           {tareas.length === 0 ? (
             <p>No hay ninguna tarea. Arrancá pa' las 8hs.</p>
           ) : (
-            tareas.map((tarea, index) => (
-              <Tarea key={index} tarea={tarea} borrarTarea={this.borrarTarea} />
-            ))
-          )}
+              tareas.map((tarea, index) => (
+                <Tarea key={index} tarea={tarea} borrarTarea={this.borrarTarea} />
+              ))
+            )}
         </div>
       </>
     );
