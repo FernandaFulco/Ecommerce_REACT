@@ -59,7 +59,7 @@ const Login = ({ history }) => {
             });
           } else {
             sessionStorage.setItem("usuarioLogueado",1);
-            history.push("/tareas");
+            history.push("/home ");
           }
         })
         .catch(err => console.log("Error!",err));

@@ -17,14 +17,14 @@ class App extends Component {
         <header className="App-header">
           <p>Tienda Online</p>
         </header>
-        <Home />
+        
         <Switch>
           <Route path="/home" component={Home} exact/>
           <Route path="/tareas" component={ManejoTareas} exact/>
           <Route path="/login" component={Login} exact/>
           <Route path="/register" component={Register} exact/>
           <Route path="/products" component={Products} exact/>
-          <Route component={PageNotFound}/>
+          {/*<Route component={PageNotFound}/>*/}
           
         </Switch>
       </div>

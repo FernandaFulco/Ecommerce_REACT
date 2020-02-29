@@ -15,14 +15,7 @@ class Products extends React.Component {
       console.log(this.state.listadoProductos);
   }
 
-   filtrar(){
-    let buscarInput = document.getElementById("buscar");
-    this.state.listadoProductosFiltrados = this.state.listadoProductos
-      .filter(function(producto) {
-        if (producto.nombre.startsWith(buscarInput)) return producto;
-      })
-      
-  }
+   
 
   render() {
     return (
