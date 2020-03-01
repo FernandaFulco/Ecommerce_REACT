@@ -41,7 +41,7 @@ const Login = ({ history }) => {
   // }
 
   const handleSubmit = (event) => {
-    event.preventDefault();//prevenir que se ejecute
+    event.preventDefault();//en React no puedes retornar false para prevenir el comportamiento por defecto. Debes, explícitamente, llamar preventDefault
 
     fetch('http://tiendaonline2020.herokuapp.com/api/user/login',{
             method: 'POST',

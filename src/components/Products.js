@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import Login from "./Login";
 import Home from './Home';
+import Carrito from './Carrito'; 
+
 
 class Products extends React.Component {
   constructor(props) {
@@ -10,14 +12,7 @@ class Products extends React.Component {
       listadoProductos: [],
       listadoProductosFiltrados: [],
       search: "",
-
-      listadoCompras: [],
-      subTotal: 0,
-      iva: 0,
-      total: 0,
-      totalItems: 0,
-
-
+      carro: [],
     };
   }
 
@@ -61,28 +56,19 @@ class Products extends React.Component {
         this.props.history.push("/products");
       }
   } */
-  agregarProducto = (props) => {
-    const objeto = props.value;
+  /** */
+
+  comprar = (props) => {
     console.log(props);
-    console.log(objeto);
-
-
-    if (sessionStorage.getItem("usuarioLogueado") !== "1") {
-      this.props.history.push("/login");
-    } else {
-
-
-      if (this.objeto !== 'undefined') {
-        console.log(objeto);
-        console.log('holaa soy fer');
-        this.state.productoParaAgregar = this.state.listadoProductos.filter(item => item._id === props)
-        this.state.listadoCompras.push(this.state.productosParaAgregar)
-        console.log(this.state.listadoCompras);
-
-      }
-
-    }
+    const carro = agregarProducto(this.state.carro);
+    this.setState({
+      carro: carro
+    })
   }
+
+  
+
+
 
   render() {
 
@@ -99,18 +85,19 @@ class Products extends React.Component {
           </div>
           <div>
             {productosAMostrar.map((item, i) => (
-              <div key={i}>
+              <div key={item._id}>
                 <div className='Producto'>
                   <h3>Product name:{item.name}</h3>
                   <span>Price: {item.price}</span>
                   <img src={item.photo} width="200" />
-                  <button onClick={() => this.agregarProducto(item)}>Comprar</button>
+                  <button onClick={() => this.comprar(item)}>Comprar</button>{/**this será undefined cuando se llame la función. */}
                   {/**<button onClick={this.agregarProducto(item)}>Comprar</button> */}
                 </div>
               </div>
             ))}
           </div>
         </div>
+        <Carrito carrito = {this.state.carro} ></Carrito>
       </div>
     );
   }
