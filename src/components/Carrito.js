@@ -5,54 +5,87 @@ import Products from "./Products";
 
 
 class Carrito extends React.Component {
-    constructor(props){
 
-        super(props)
-        this.state = {
-            subTotal: 0,
-            iva: 0,
-            total: 0,
-            totalItems: 0,
-        }
 
+
+    subTotal = (carrito) => {
+
+        debugger
+        let total = 0;
+        carrito.map((obj) => total += obj.cantidad * obj.price);
+        return total;
+    }
+
+    cantidadItems = (carrito) => {
+        let cantidad = 0;
+        carrito.map((obj) => cantidad += obj.cantidad);
+        return cantidad;
     }
 
 
-    agregarProducto = (item) => {
-        const objeto = item;
-        console.log('Agregar' + objeto);
-        alert(item.name)
-    
-        if (sessionStorage.getItem("usuarioLogueado") !== "1") {
-          this.props.history.push("/login");
-        } else {
-    
-    
-          if (this.objeto !== 'undefined') {
-
-
-
-            console.log(objeto);
-            console.log('holaa soy fer');
-            /*this.state.productoParaAgregar = this.state.listadoProductos.filter(item => item._id === item)
-            this.state.listadoCompras.push(this.state.productosParaAgregar)*/
-            //const producto = this.listadoCompras.push(objeto);
-            console.log(this.state.listadoCompras);
-    
-          }
-    
-        }
-      }
-
 
     render() {
+        console.log(this.props);
+        debugger
+        let subTotal = this.subTotal(this.props.carrito);
+        let total = subTotal * 1.22;
+        let iva = subTotal * 0.22;
+        let cantidad = 0;
+        let mostrarProductos = (this.props.carrito.map(producto =>
+            <tr key={producto._id}>
+                <td><img src={producto.photo} style={{ width: '5rem', height: '5rem' }} /> </td>
+                <td>{producto.name}</td>
 
+                <td>{producto.cantidad}</td>
+                <td className="text-right">$ {producto.price}</td>
+                <td className="text-right"><button className="btn btn-sm btn-primary"  >Eliminar<i className="fa fa-trash"></i> </button> </td>
+            </tr>
+        ));
+        console.log('Este es el id del producto:' + this.props);
+        //<label>Hola</label>
         return (
+
             <div>
+                <table className="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col"> </th>
+                            <th scope="col">Product</th>
+
+                            <th scope="col" className="text-center">Quantity</th>
+                            <th scope="col" className="text-right">Price</th>
+                            <th> </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {mostrarProductos}
+                        <tr>
+                            <td></td>
+                            <td>Cantidad productos</td>
+                            <td>{cantidad}</td>
+                            <td>SubTotal</td>
+                            <td className="text-right">{subTotal}$</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>iva</td>
+                            <td className="text-right">{iva}$</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><strong>Total</strong></td>
+                            <td className="text-right"><strong>{total}$</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
                 <p>Carrito de compras</p>
-                <p>Subtotal:{}</p>
-                <p>IVA:{}</p>
-                <p>Total:{}</p>
+                <p>Subtotal:{subTotal}</p>
+                <p>IVA:{iva}</p>
+                <p>Total:{total}</p>
                 <p>Cantidad de items:{}</p>
 
 
