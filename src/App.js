@@ -26,13 +26,13 @@ class App extends Component {
           
         <BrowserRouter>
           <Switch>
-            <Route path="/products" component={Products} exact />
             <Route path="/tareas" component={ManejoTareas} exact />
             <Route path="/login" component={Login} exact />
             <Route path="/register" component={Register} exact />
             <Route path="/carrito" component={Carrito} exact />
             <Route path="/home" component={Home} exact />
             {/*<Route component={PageNotFound}/>*/}
+            <Route path="/" component={Products} exact />
 
           </Switch>
         </BrowserRouter>
