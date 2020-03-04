@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import Login from "./Login";
 import Home from './Home';
 import Carrito from './Carrito';
+import EliminarProductos from "./EliminarProductos";
 
 
 class Products extends React.Component {
@@ -41,43 +42,52 @@ class Products extends React.Component {
 
 
 
-  comprar = (item,  cantidad) => {
+  comprar = (item, cantidad) => { //recibo un objeto y una cantidad
     console.log(item);
-debugger;
+    //debugger;
 
     if (sessionStorage.getItem("usuarioLogueado") !== "1") {
       this.props.history.push("/login");
     } else {
-      let nuevoCarrito = this.state.carro
-      let index=-1;
+      let nuevoCarrito = this.state.carro 
+      let index = -1;
 
-         index = nuevoCarrito.findIndex(carrito => carrito._id === item._id)
-  
-      debugger;
-      
-      const obj = {...item,cantidad};
-      if(index >= 0){
-        nuevoCarrito[index].cantidad += cantidad;
-      }else{
+      index = nuevoCarrito.findIndex(carrito => carrito._id === item._id)//devuelve 1 si se cumple, carrito es mi iterador
+
+     // debugger;
+
+      const obj = { ...item, cantidad };
+      if (index >= 0) {
+        nuevoCarrito[index].cantidad += cantidad; //si ya existe, solo incremento la cantidad
+      } else {
         nuevoCarrito.push(obj)
       }
 
       this.setState({
         carro: nuevoCarrito
       })
-      
-     
+
+
     }
 
   }
 
 
-
+  borrarProducto = nombre => {
+    debugger
+    console.log('Nombre producto  a borrar' + this.nombre)
+    const { carro } = this.state;
+    // const tareasFiltradas = tareas.filter(({nombre: nombreTarea}) => nombreTarea !== nombre);
+    const productosFiltradas = carro.filter(unProducto => unProducto.name !== nombre);
+    this.setState({ carro: productosFiltradas });
+  };
 
 
 
 
   render() {
+    const { carro } = this.state;
+
     console.log(this.state.carro);
     const productosAMostrar = this.state.search.length < 1 ? this.state.listadoProductos : this.state.listadoProductosFiltrados;
 
@@ -95,13 +105,21 @@ debugger;
                   <img src={item.photo} width="200" />
                   <button onClick={() => this.comprar(item, 1)}>Comprar</button>{/**this será undefined cuando se llame la función. */}
                   {/**<button onClick={this.agregarProducto(item)}>Comprar</button> */}
-                  
+
                 </div>
               </div>
             ))}
           </div>
         </div>
         <Carrito carrito={this.state.carro} ></Carrito>
+
+        {/*carro.length === 0 ? (
+          <p>No hay productos en el carrito.</p>
+        ) : (
+            carro.map((unProducto, index) => (
+              <EliminarProductos key={index} unProducto={unProducto} borrarProducto={this.borrarProducto} />
+            ))
+          )*/}
       </div>
     );
   }

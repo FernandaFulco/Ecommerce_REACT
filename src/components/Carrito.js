@@ -38,11 +38,11 @@ class Carrito extends React.Component {
 
                 <td>{producto.cantidad}</td>
                 <td className="text-right">$ {producto.price}</td>
-                <td className="text-right"><button className="btn btn-sm btn-primary"  >Eliminar<i className="fa fa-trash"></i> </button> </td>
+                <td className="text-right"><button className="btn btn-sm btn-primary" onClick={() => this.borrarProducto(this.nombre)} >Eliminar<i className="fa fa-trash"></i> </button> </td>
             </tr>
         ));
         console.log('Este es el id del producto:' + this.props);
-        //<label>Hola</label>
+        
         return (
 
             <div>
@@ -50,7 +50,7 @@ class Carrito extends React.Component {
                     <thead>
                         <tr>
                             <th scope="col"> </th>
-                            <th scope="col">Product</th>
+                            <th scope="col">Producto</th>
 
                             <th scope="col" className="text-center">Quantity</th>
                             <th scope="col" className="text-right">Price</th>
@@ -86,7 +86,7 @@ class Carrito extends React.Component {
                 <p>Subtotal:{subTotal}</p>
                 <p>IVA:{iva}</p>
                 <p>Total:{total}</p>
-                <p>Cantidad de items:{}</p>
+                <p>Cantidad de items:{cantidad}</p>
 
 
             </div>

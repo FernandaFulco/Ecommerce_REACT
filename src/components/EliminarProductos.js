@@ -3,8 +3,8 @@ import "../styles/tarea.scss";
 
 // Ya estoy recibiendo desestructuradas a las props! No necesito
 //      tener una variable para las props.
-const EliminarProductos = ({ producto: { nombre }, borrarProducto }) => (
-  <div className="tarea">
+const EliminarProductos = ({ unProducto: { nombre }, borrarProducto }) => (
+  <div>
     <span>{nombre}</span>
     <input
       type="button"
