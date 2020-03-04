@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import Login from "./Login";
 import Products from "./Products";
-
+import { Navbar, Form, Nav, NavDropdown, FormControl, Button, ListGroup,Card } from 'react-bootstrap';
 
 class Carrito extends React.Component {
 
@@ -26,7 +26,7 @@ class Carrito extends React.Component {
 
     render() {
         console.log(this.props);
-        const {borrarProducto}=(this.props)
+        const { borrarProducto } = (this.props)
         debugger
         let subTotal = this.subTotal(this.props.carrito);
         let total = subTotal * 1.22;
@@ -43,7 +43,7 @@ class Carrito extends React.Component {
             </tr>
         ));
         console.log('Este es el id del producto:' + this.props);
-        
+
         return (
 
             <div>
@@ -83,13 +83,14 @@ class Carrito extends React.Component {
                         </tr>
                     </tbody>
                 </table>
-                <p>Carrito de compras</p>
-                <p>Subtotal:{subTotal}</p>
-                <p>IVA:{iva}</p>
-                <p>Total:{total}</p>
-                <p>Cantidad de items:{cantidad}</p>
-
-
+                <Card style={{ width: '18rem' }}>
+                    <ListGroup variant="flush">
+                        <ListGroup.Item>Carrito</ListGroup.Item>
+                        <ListGroup.Item>Subtotal:{subTotal}</ListGroup.Item>
+                        <ListGroup.Item>IVA:{iva}</ListGroup.Item>
+                        <ListGroup.Item>Total:{total}</ListGroup.Item>
+                    </ListGroup>
+                </Card>
             </div>
         );
     }

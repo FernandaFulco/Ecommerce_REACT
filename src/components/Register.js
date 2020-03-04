@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import '../styles/register.scss';
+import { Navbar,Form,Nav,NavDropdown,FormControl,Button } from 'react-bootstrap';
 
 const Register = ({ history }) => {
 

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import Login from "./Login";
 import Carrito from './Carrito';
+import { Navbar, Form, Nav, NavDropdown, FormControl, Button, Card, InputGroup } from 'react-bootstrap';
 
 
 
@@ -44,12 +45,12 @@ class Products extends React.Component {
     if (sessionStorage.getItem("usuarioLogueado") !== "1") {
       this.props.history.push("/login");
     } else {
-      let nuevoCarrito = this.state.carro 
+      let nuevoCarrito = this.state.carro
       let index = -1;
 
       index = nuevoCarrito.findIndex(carrito => carrito._id === item._id)//devuelve 1 si se cumple, carrito es mi iterador
 
-     // debugger;
+      // debugger;
 
       const obj = { ...item, cantidad };
       if (index >= 0) {
@@ -88,21 +89,37 @@ class Products extends React.Component {
 
 
     return (
-      <div>
-        <div className="row">
-          <input type='text' placeholder='Buscar productos' value={this.state.search} name="search" required onChange={(e) => { this.handleChange(e, `search`) }} />
-          <div>
-            {productosAMostrar.map((item, i) => (
-              <div key={item._id}>
-                <div className='Producto'>
-                  <h3>Product name:{item.name}</h3>
-                  <span>Price: {item.price}</span>
-                  <img src={item.photo} width="200" />
-                  <button onClick={() => this.comprar(item, 1)}>Comprar</button>{/**this será undefined cuando se llame la función. */}
-                </div>
-              </div>
-            ))}
-          </div>
+      <div className='container'>
+        <div className='row'>
+
+          <InputGroup className="mb-3 mt-3">
+            <FormControl
+              placeholder="Buscar"
+              aria-label="Recipient's username"
+              aria-describedby="basic-addon2"
+              value={this.state.search} name="search" required onChange={(e) => { this.handleChange(e, `search`) }}
+            />
+            <Button variant="primary" href='./register'>Registrarme</Button>
+          </InputGroup>
+
+
+
+          {productosAMostrar.map((item, i) => (
+            <div key={item._id}>
+              <Card style={{ width: '18rem', height: '25rem' }} className='m-3 p-1'>
+                <Card.Img variant="top" src={item.photo} style={{ width: '16rem', height: '14rem' }} className='ml-2 p-1' />
+                <Card.Body>
+                  <Card.Title>{item.name}</Card.Title>
+                  <Card.Text>
+                    USD: {item.price}
+                  </Card.Text>
+                  <Button variant="primary" onClick={() => this.comprar(item, 1)}>Comprar</Button>{/**this será undefined cuando se llame la función. */}
+                </Card.Body>
+              </Card>
+            </div>
+          ))}
+
+
         </div>
         <Carrito carrito={this.state.carro} borrarProducto={this.borrarProducto} ></Carrito>
       </div>

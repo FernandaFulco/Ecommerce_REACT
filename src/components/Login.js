@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import '../styles/login.scss';
+import { Navbar,Form,Nav,NavDropdown,FormControl,Button } from 'react-bootstrap';
 
 const Login = ({ history }) => {
 
@@ -75,7 +76,7 @@ const Login = ({ history }) => {
         <input type="email" name="email" value={email} onChange={handleInputChange} required />
         <label htmlFor="password">Contraseña: </label>
         <input type="password" name="password" value={password} onChange={handleInputChange} required />
-        <input type="submit" value="Iniciar Sesión" />
+        <Button type="submit"  variant="success">Iniciar Sesión</Button>
       </form>
       {errorMsg &&
         <h2 className="error">{errorMsg}</h2>
