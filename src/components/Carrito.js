@@ -26,6 +26,7 @@ class Carrito extends React.Component {
 
     render() {
         console.log(this.props);
+        const {borrarProducto}=(this.props)
         debugger
         let subTotal = this.subTotal(this.props.carrito);
         let total = subTotal * 1.22;
@@ -38,7 +39,7 @@ class Carrito extends React.Component {
 
                 <td>{producto.cantidad}</td>
                 <td className="text-right">$ {producto.price}</td>
-                <td className="text-right"><button className="btn btn-sm btn-primary" onClick={() => this.borrarProducto(this.nombre)} >Eliminar<i className="fa fa-trash"></i> </button> </td>
+                <td className="text-right"><button className="btn btn-sm btn-primary" onClick={() => borrarProducto(producto)} >Eliminar<i className="fa fa-trash"></i> </button> </td>
             </tr>
         ));
         console.log('Este es el id del producto:' + this.props);

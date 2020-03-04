@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import Login from "./Login";
-import Home from './Home';
 import Carrito from './Carrito';
-import EliminarProductos from "./EliminarProductos";
+
 
 
 class Products extends React.Component {
@@ -16,10 +15,6 @@ class Products extends React.Component {
       carro: [],
     };
   }
-
-
-
-
 
   componentDidMount() {//una sola vez se ejecuta después que la salida del componente ha sido renderizada en el DOM.
     fetch("http://tiendaonline2020.herokuapp.com/api/product/all")
@@ -73,12 +68,12 @@ class Products extends React.Component {
   }
 
 
-  borrarProducto = nombre => {
+  borrarProducto = (producto) => {
     debugger
     console.log('Nombre producto  a borrar' + this.nombre)
     const { carro } = this.state;
     // const tareasFiltradas = tareas.filter(({nombre: nombreTarea}) => nombreTarea !== nombre);
-    const productosFiltradas = carro.filter(unProducto => unProducto.name !== nombre);
+    const productosFiltradas = carro.filter(unProducto => unProducto !== producto);
     this.setState({ carro: productosFiltradas });
   };
 
@@ -104,26 +99,15 @@ class Products extends React.Component {
                   <span>Price: {item.price}</span>
                   <img src={item.photo} width="200" />
                   <button onClick={() => this.comprar(item, 1)}>Comprar</button>{/**this será undefined cuando se llame la función. */}
-                  {/**<button onClick={this.agregarProducto(item)}>Comprar</button> */}
-
                 </div>
               </div>
             ))}
           </div>
         </div>
-        <Carrito carrito={this.state.carro} ></Carrito>
-
-        {/*carro.length === 0 ? (
-          <p>No hay productos en el carrito.</p>
-        ) : (
-            carro.map((unProducto, index) => (
-              <EliminarProductos key={index} unProducto={unProducto} borrarProducto={this.borrarProducto} />
-            ))
-          )*/}
+        <Carrito carrito={this.state.carro} borrarProducto={this.borrarProducto} ></Carrito>
       </div>
     );
   }
 }
 
 export default withRouter(Products);
-

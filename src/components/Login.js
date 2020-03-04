@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
-import Home from './Home';
 import '../styles/login.scss';
 
 const Login = ({ history }) => {
@@ -63,7 +62,7 @@ const Login = ({ history }) => {
           });
         } else {
           sessionStorage.setItem("usuarioLogueado", 1);//sessionStorage.getItem("usuarioLogueado"); si es dis 1 
-          history.push("/home");
+          history.push("/");
         }
       })
       .catch(err => console.log("Error!", err));
