@@ -55,7 +55,7 @@ const Register = ({ history }) => {
         if (res.status && res.status !== 200) {
           setState({
             ...state,
-            errorMsg: "El email ya esta en uso."
+            errorMsg: "El email ya se encuentra registrado."
           });
         } else {
           sessionStorage.setItem("usuarioLogueado", 1);
@@ -66,17 +66,19 @@ const Register = ({ history }) => {
   }
 
   return (
-    <div className="register">
+    <div className="register row">
       <form onSubmit={handleSubmit} className="register-form">
         <label htmlFor="email">Nombre de usuario: </label>
-        <input type="email" name="email" value={email} onChange={handleInputChange} required />
+        <input type="email" name="email" value={email} className="shadow bg-white rounded" onChange={handleInputChange} required />
         <label htmlFor="password">Contraseña: </label>
-        <input type="password" name="password" value={password} onChange={handleInputChange} required />
+        <input type="password" name="password" value={password} className="shadow bg-white rounded" onChange={handleInputChange} required />
         <Button variant="primary" type="submit">Registrarme</Button>
+      </form>
+      <div className='col-12 d-flex justify-content-center mt-2'>
         {errorMsg &&
           <h2 className="error">{errorMsg}</h2>
         }
-      </form>
+      </div>
     </div>
   );
 };

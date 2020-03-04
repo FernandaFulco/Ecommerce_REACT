@@ -72,11 +72,12 @@ const Login = ({ history }) => {
   return (
     <div className="login">
       <form onSubmit={handleSubmit} className="login-form">
-        <label htmlFor="email">Nombre de usuario: </label>
-        <input type="email" name="email" value={email} onChange={handleInputChange} required />
+        <label htmlFor="email">Email: </label>
+        <input type="email" name="email" value={email} className="shadow bg-white rounded" onChange={handleInputChange} required />
         <label htmlFor="password">Contraseña: </label>
-        <input type="password" name="password" value={password} onChange={handleInputChange} required />
+        <input type="password" name="password" value={password} className="shadow bg-white rounded" onChange={handleInputChange} required />
         <Button type="submit"  variant="success">Iniciar Sesión</Button>
+        <Button href='./register' type="submit" className='mt-2' variant="success">Registrarme</Button>
       </form>
       {errorMsg &&
         <h2 className="error">{errorMsg}</h2>
