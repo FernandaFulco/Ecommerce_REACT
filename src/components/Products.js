@@ -3,6 +3,8 @@ import { withRouter } from "react-router-dom";
 import Login from "./Login";
 import Carrito from './Carrito';
 import { Navbar, Form, Nav, NavDropdown, FormControl, Button, Card, InputGroup } from 'react-bootstrap';
+import { FaBeer, FaChrome, FaShoppingCart } from 'react-icons/fa';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
@@ -16,6 +18,7 @@ class Products extends React.Component {
       carro: [],
     };
   }
+
 
   componentDidMount() {//una sola vez se ejecuta después que la salida del componente ha sido renderizada en el DOM.
     fetch("http://tiendaonline2020.herokuapp.com/api/product/all")
@@ -89,39 +92,42 @@ class Products extends React.Component {
 
 
     return (
-      <div className='container'>
-        <div className='row'>
+      <div>
+        
+        <div className='container'>
+          <div className='row'>
 
-          <InputGroup className="mb-3 mt-3">
-            <FormControl
-              placeholder="Buscar"
-              aria-label="Recipient's username"
-              aria-describedby="basic-addon2"
-              value={this.state.search} name="search" required onChange={(e) => { this.handleChange(e, `search`) }}
-            />
-            <Button variant="primary" href='./register'>Registrarme</Button>
-          </InputGroup>
-
-
-
-          {productosAMostrar.map((item, i) => (
-            <div key={item._id}>
-              <Card style={{ width: '18rem', height: '25rem' }} className='m-3 p-1'>
-                <Card.Img variant="top" src={item.photo} style={{ width: '16rem', height: '14rem' }} className='ml-2 p-1' />
-                <Card.Body>
-                  <Card.Title>{item.name}</Card.Title>
-                  <Card.Text>
-                    USD: {item.price}
-                  </Card.Text>
-                  <Button variant="primary" onClick={() => this.comprar(item, 1)}>Comprar</Button>{/**this será undefined cuando se llame la función. */}
-                </Card.Body>
-              </Card>
-            </div>
-          ))}
+            <InputGroup className="mb-3 mt-3">
+              <FormControl
+                placeholder="Buscar"
+                aria-label="Recipient's username"
+                aria-describedby="basic-addon2"
+                value={this.state.search} name="search" required onChange={(e) => { this.handleChange(e, `search`) }}
+              />
+            </InputGroup>
 
 
+
+            {productosAMostrar.map((item, i) => (
+              <div key={item._id}>
+                <Card style={{ width: '18rem', height: '25rem' }} className='m-3 p-1'>
+                  <Card.Img variant="top" src={item.photo} style={{ width: '16rem', height: '14rem' }} className='ml-2 p-1' />
+                  <Card.Body>
+                    <Card.Title>{item.name}</Card.Title>
+                    <Card.Text>
+                      USD: {item.price}
+                    </Card.Text>
+                    <Button variant="primary" onClick={() => this.comprar(item, 1)}>Comprar</Button>{/**this será undefined cuando se llame la función. */}
+                  </Card.Body>
+                </Card>
+              </div>
+            ))}
+
+
+          </div>
+          <Carrito carrito={this.state.carro} borrarProducto={this.borrarProducto} ></Carrito>
+          <span><FaBeer /></span>
         </div>
-        <Carrito carrito={this.state.carro} borrarProducto={this.borrarProducto} ></Carrito>
       </div>
     );
   }

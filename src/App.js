@@ -8,6 +8,8 @@ import Products from './components/Products';
 import Carrito from './components/Carrito';
 import PageNotFound from './components/PageNotFound';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { FaBeer, FaChrome, FaShoppingCart } from 'react-icons/fa';
+import { Navbar, Form, Nav, NavDropdown, FormControl, Button, Card, InputGroup } from 'react-bootstrap';
 
 class App extends Component {
 
@@ -18,7 +20,12 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
+          <span><FaShoppingCart className='FaShoppingCart' /></span>
           <p>Tienda Online</p>
+          <div className=" row ml-4">
+            <Button variant="primary" href='./register' className='m-2'>Registrarme</Button>
+            <Button variant="primary" href='./login' className='m-2 '>Iniciar Sesión </Button>
+          </div>
         </header>
         <body>
           <BrowserRouter>
